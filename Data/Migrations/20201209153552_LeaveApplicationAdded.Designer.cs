@@ -10,8 +10,8 @@ using StartupProject_Asp.NetCore_PostGRE.Data;
 namespace StartupProject_Asp.NetCore_PostGRE.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201120155222_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20201209153552_LeaveApplicationAdded")]
+    partial class LeaveApplicationAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,6 +21,145 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Migrations
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
                 .HasAnnotation("ProductVersion", "3.1.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            modelBuilder.Entity("StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData.LeaveApplication", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("AddressDuringLeave")
+                        .IsRequired()
+                        .HasColumnName("AddressDuringLeave")
+                        .HasColumnType("character varying(32767)")
+                        .HasMaxLength(32767);
+
+                    b.Property<Guid?>("ApplicantId")
+                        .HasColumnName("ApplicantId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("ApplicationStatus")
+                        .HasColumnName("ApplicationStatus")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("CreateTime")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnName("CreateTime")
+                        .HasColumnType("TIMESTAMPTZ");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Designation")
+                        .IsRequired()
+                        .HasColumnName("Designation")
+                        .HasColumnType("character varying(32767)")
+                        .HasMaxLength(32767);
+
+                    b.Property<Guid?>("LastSignedId")
+                        .HasColumnName("LastSignedId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("LastUpdateTime")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnName("LastUpdateTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("LeaveEnd")
+                        .HasColumnName("LeaveEnd")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("LeaveStart")
+                        .HasColumnName("LeaveStart")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("LeaveType")
+                        .HasColumnName("LeaveType")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnName("ApplicantName")
+                        .HasColumnType("character varying(32767)")
+                        .HasMaxLength(32767);
+
+                    b.Property<string>("PhoneNoDuringLeave")
+                        .IsRequired()
+                        .HasColumnName("PhoneNoDuringLeave")
+                        .HasColumnType("character varying(11)")
+                        .HasMaxLength(11);
+
+                    b.Property<string>("PurposeOfLeave")
+                        .IsRequired()
+                        .HasColumnName("PurposeOfLeave")
+                        .HasColumnType("character varying(32767)")
+                        .HasMaxLength(32767);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicantId");
+
+                    b.HasIndex("LastSignedId");
+
+                    b.ToTable("LeaveApplications");
+                });
+
+            modelBuilder.Entity("StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData.XmlFile", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("CreateTime")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnName("CreateTime")
+                        .HasColumnType("TIMESTAMPTZ");
+
+                    b.Property<long>("DbEntryId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("FileContent")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasColumnName("FileContent")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FileRealName")
+                        .IsRequired()
+                        .HasColumnName("FileRealName")
+                        .HasColumnType("character varying(32767)")
+                        .HasMaxLength(32767);
+
+                    b.Property<bool>("IsAlreadyUsed")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("LastUpdateTime")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnName("LastUpdateTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<Guid?>("PreviousFileId")
+                        .HasColumnName("PreviousFileId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("SignerId")
+                        .HasColumnName("SignerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("TableName")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PreviousFileId");
+
+                    b.HasIndex("SignerId");
+
+                    b.ToTable("XmlFiles");
+                });
 
             modelBuilder.Entity("StartupProject_Asp.NetCore_PostGRE.Data.Models.Identity.Role", b =>
                 {
@@ -54,43 +193,11 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("85f55b49-5bac-4cde-a428-6094455c5cfd"),
-                            ConcurrencyStamp = "0d7b3108-fc97-4510-9ea4-d674ddff7f7c",
-                            Description = "Super Admin",
-                            Name = "SuperAdmin",
-                            NormalizedName = "SUPERADMIN"
-                        },
-                        new
-                        {
-                            Id = new Guid("2b0f4cbe-31d1-4a34-a870-b5aee5462363"),
-                            ConcurrencyStamp = "93de3f59-a10a-4b11-b6dc-389b41594fcc",
-                            Description = "Admin",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = new Guid("3a184a66-c5c4-4d17-983c-39a8ad4df069"),
-                            ConcurrencyStamp = "cdcd4bd2-d193-4015-9a0f-b546c39662dc",
-                            Description = "Auditor",
-                            Name = "Auditor",
-                            NormalizedName = "AUDITOR"
-                        },
-                        new
-                        {
-                            Id = new Guid("2c9b8308-30e1-46b4-8856-aac7bcae827d"),
-                            ConcurrencyStamp = "dc495638-1d28-43e8-96b0-1859f09e4639",
-                            Description = "Team Member",
-                            Name = "TeamMember",
-                            NormalizedName = "TEAMMEMBER"
-                        },
-                        new
-                        {
-                            Id = new Guid("c78ca36a-0fee-4248-8e4f-c19513a23b63"),
-                            ConcurrencyStamp = "65d03625-92d1-43ca-9a7e-595de5f827dd",
-                            Description = "Basic Member",
-                            Name = "BasicMember",
-                            NormalizedName = "BASICMEMBER"
+                            Id = new Guid("537af2a0-eb47-45d5-9dae-9d7ab09cdeec"),
+                            ConcurrencyStamp = "c368e57d-87aa-49b3-a72a-26822535514b",
+                            Description = "12/9/2020 3:35:51 PM",
+                            Name = "Super-Admin",
+                            NormalizedName = "SUPER-ADMIN"
                         });
                 });
 
@@ -108,18 +215,58 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<Guid>("RoleId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("RoleId1")
+                        .HasColumnName("RoleId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
                     b.HasIndex("RoleId");
 
-                    b.HasIndex("RoleId1");
-
                     b.ToTable("RoleClaim","Identity");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = -1,
+                            ClaimType = "SuperAdmin_All",
+                            ClaimValue = "SuperAdmin.All",
+                            RoleId = new Guid("537af2a0-eb47-45d5-9dae-9d7ab09cdeec")
+                        },
+                        new
+                        {
+                            Id = -2,
+                            ClaimType = "Role_Create",
+                            ClaimValue = "Role.Create",
+                            RoleId = new Guid("537af2a0-eb47-45d5-9dae-9d7ab09cdeec")
+                        },
+                        new
+                        {
+                            Id = -3,
+                            ClaimType = "Role_Read",
+                            ClaimValue = "Role.Read",
+                            RoleId = new Guid("537af2a0-eb47-45d5-9dae-9d7ab09cdeec")
+                        },
+                        new
+                        {
+                            Id = -4,
+                            ClaimType = "Role_Update",
+                            ClaimValue = "Role.Update",
+                            RoleId = new Guid("537af2a0-eb47-45d5-9dae-9d7ab09cdeec")
+                        },
+                        new
+                        {
+                            Id = -5,
+                            ClaimType = "Role_Delete",
+                            ClaimValue = "Role.Delete",
+                            RoleId = new Guid("537af2a0-eb47-45d5-9dae-9d7ab09cdeec")
+                        },
+                        new
+                        {
+                            Id = -6,
+                            ClaimType = "Claim_Create",
+                            ClaimValue = "Claim.Create",
+                            RoleId = new Guid("537af2a0-eb47-45d5-9dae-9d7ab09cdeec")
+                        });
                 });
 
             modelBuilder.Entity("StartupProject_Asp.NetCore_PostGRE.Data.Models.Identity.User", b =>
@@ -201,17 +348,19 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("72497bc1-2879-4022-af64-30345b73cfef"),
+                            Id = new Guid("bda81396-6b95-4e10-b3f0-9f5ed69b51c9"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "be2aa85c-d55b-44f3-a762-f47c3c95ed0b",
+                            ConcurrencyStamp = "1230398c-0a79-4bad-8174-7d4f41916993",
                             Email = "abrar@jahin.com",
                             EmailConfirmed = true,
+                            FirstName = "Abrar",
+                            LastName = "Jahin",
                             LockoutEnabled = false,
                             NormalizedEmail = "ABRAR@JAHIN.COM",
                             NormalizedUserName = "ABRAR",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGQDu83uU8avcQ6SXzGH7/7nHhldEi1Eo2nzZV9POpiBVfLHSwdtoZB69GRXy0lxxg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMzCrVPdJnDVDY/Z3GJ3SKyVP/LuFiX+oqyPF//0/eFMsumquSXdRF24MlFfqB3TWQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "637415059413407165_505bc728-908e-4866-a567-ee9104cc6d18",
+                            SecurityStamp = "637431465512677133_65a02eab-34ed-4845-8bd4-4e6a92cb20a3",
                             TwoFactorEnabled = false,
                             UserName = "abrar",
                             UsernameChangeLimit = 10
@@ -249,30 +398,44 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Migrations
                         new
                         {
                             Id = -1,
-                            ClaimType = "RoleRead",
-                            ClaimValue = "Read Role",
-                            UserId = new Guid("72497bc1-2879-4022-af64-30345b73cfef")
+                            ClaimType = "SuperAdmin_All",
+                            ClaimValue = "SuperAdmin.All",
+                            UserId = new Guid("bda81396-6b95-4e10-b3f0-9f5ed69b51c9")
                         },
                         new
                         {
                             Id = -2,
-                            ClaimType = "RoleWrite",
-                            ClaimValue = "Write Role",
-                            UserId = new Guid("72497bc1-2879-4022-af64-30345b73cfef")
+                            ClaimType = "Role_Create",
+                            ClaimValue = "Role.Create",
+                            UserId = new Guid("bda81396-6b95-4e10-b3f0-9f5ed69b51c9")
                         },
                         new
                         {
                             Id = -3,
-                            ClaimType = "RoleUpdate",
-                            ClaimValue = "Update Role",
-                            UserId = new Guid("72497bc1-2879-4022-af64-30345b73cfef")
+                            ClaimType = "Role_Read",
+                            ClaimValue = "Role.Read",
+                            UserId = new Guid("bda81396-6b95-4e10-b3f0-9f5ed69b51c9")
                         },
                         new
                         {
                             Id = -4,
-                            ClaimType = "RoleDelete",
-                            ClaimValue = "Delete Role",
-                            UserId = new Guid("72497bc1-2879-4022-af64-30345b73cfef")
+                            ClaimType = "Role_Update",
+                            ClaimValue = "Role.Update",
+                            UserId = new Guid("bda81396-6b95-4e10-b3f0-9f5ed69b51c9")
+                        },
+                        new
+                        {
+                            Id = -5,
+                            ClaimType = "Role_Delete",
+                            ClaimValue = "Role.Delete",
+                            UserId = new Guid("bda81396-6b95-4e10-b3f0-9f5ed69b51c9")
+                        },
+                        new
+                        {
+                            Id = -6,
+                            ClaimType = "Claim_Create",
+                            ClaimValue = "Claim.Create",
+                            UserId = new Guid("bda81396-6b95-4e10-b3f0-9f5ed69b51c9")
                         });
                 });
 
@@ -335,33 +498,9 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("72497bc1-2879-4022-af64-30345b73cfef"),
-                            RoleId = new Guid("85f55b49-5bac-4cde-a428-6094455c5cfd"),
-                            ReasonForAdding = "Migration"
-                        },
-                        new
-                        {
-                            UserId = new Guid("72497bc1-2879-4022-af64-30345b73cfef"),
-                            RoleId = new Guid("2b0f4cbe-31d1-4a34-a870-b5aee5462363"),
-                            ReasonForAdding = "Migration"
-                        },
-                        new
-                        {
-                            UserId = new Guid("72497bc1-2879-4022-af64-30345b73cfef"),
-                            RoleId = new Guid("3a184a66-c5c4-4d17-983c-39a8ad4df069"),
-                            ReasonForAdding = "Migration"
-                        },
-                        new
-                        {
-                            UserId = new Guid("72497bc1-2879-4022-af64-30345b73cfef"),
-                            RoleId = new Guid("2c9b8308-30e1-46b4-8856-aac7bcae827d"),
-                            ReasonForAdding = "Migration"
-                        },
-                        new
-                        {
-                            UserId = new Guid("72497bc1-2879-4022-af64-30345b73cfef"),
-                            RoleId = new Guid("c78ca36a-0fee-4248-8e4f-c19513a23b63"),
-                            ReasonForAdding = "Migration"
+                            UserId = new Guid("bda81396-6b95-4e10-b3f0-9f5ed69b51c9"),
+                            RoleId = new Guid("537af2a0-eb47-45d5-9dae-9d7ab09cdeec"),
+                            ReasonForAdding = "Created During Migration"
                         });
                 });
 
@@ -389,17 +528,35 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Migrations
                     b.ToTable("UserToken","Identity");
                 });
 
+            modelBuilder.Entity("StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData.LeaveApplication", b =>
+                {
+                    b.HasOne("StartupProject_Asp.NetCore_PostGRE.Data.Models.Identity.User", "Applicant")
+                        .WithMany()
+                        .HasForeignKey("ApplicantId");
+
+                    b.HasOne("StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData.XmlFile", "PreviousSignedFile")
+                        .WithMany()
+                        .HasForeignKey("LastSignedId");
+                });
+
+            modelBuilder.Entity("StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData.XmlFile", b =>
+                {
+                    b.HasOne("StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData.XmlFile", "PreviousSignedFile")
+                        .WithMany()
+                        .HasForeignKey("PreviousFileId");
+
+                    b.HasOne("StartupProject_Asp.NetCore_PostGRE.Data.Models.Identity.User", "Signer")
+                        .WithMany()
+                        .HasForeignKey("SignerId");
+                });
+
             modelBuilder.Entity("StartupProject_Asp.NetCore_PostGRE.Data.Models.Identity.RoleClaim", b =>
                 {
-                    b.HasOne("StartupProject_Asp.NetCore_PostGRE.Data.Models.Identity.Role", null)
-                        .WithMany()
+                    b.HasOne("StartupProject_Asp.NetCore_PostGRE.Data.Models.Identity.Role", "Role")
+                        .WithMany("Claims")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("StartupProject_Asp.NetCore_PostGRE.Data.Models.Identity.Role", null)
-                        .WithMany("Claims")
-                        .HasForeignKey("RoleId1");
                 });
 
             modelBuilder.Entity("StartupProject_Asp.NetCore_PostGRE.Data.Models.Identity.UserClaim", b =>

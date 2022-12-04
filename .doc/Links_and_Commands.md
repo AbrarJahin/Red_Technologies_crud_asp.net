@@ -12,9 +12,16 @@
 	- Update-Database –Migration <name of last good migration>	#Restore from a good migration - example: "Update-Database –Migration InitialMigration"
     - Drop-Database		#Drop The Database
 
+## Run Migration In Linux - 
+
+- dotnet tool install --global dotnet-ef
+- dotnet ef database update -- --environment Production
+- dotnet ef migrations remove -- --environment Production
+
 ## Create New Migration after dropping Current Migration-
 
-	Update-Database 0; Remove-Migration; Add-Migration InitialMigration -OutputDir "Data/Migrations"; Update-Database
+	Update-Database 0; Remove-Migration -Force;
+	Add-Migration InitialMigration -OutputDir "Data/Migrations"; Update-Database
 
 ## Create New DB after dropping DB-
 

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using StartupProject_Asp.NetCore_PostGRE.Data.Models;
+using StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData;
 using StartupProject_Asp.NetCore_PostGRE.Data.Models.Identity;
 using StartupProject_Asp.NetCore_PostGRE.Data.Seeds;
 using System;
@@ -12,9 +13,13 @@ using System.Threading.Tasks;
 
 namespace StartupProject_Asp.NetCore_PostGRE.Data
 {
-    //public class ApplicationDbContext : IdentityDbContext<User, Role, Guid, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
     public class ApplicationDbContext : IdentityDbContext<User, Role, Guid, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
     {
+        #region Table List - Auth tables are added by default
+        public DbSet<XmlFile> XmlFiles { get; set; }
+        public DbSet<LeaveApplication> LeaveApplications { get; set; }
+        #endregion
+
         private string IdentitySchemaName = "Identity";
         private readonly IWebHostEnvironment Environment;
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IWebHostEnvironment env)
@@ -31,8 +36,8 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data
             builder.HasDefaultSchema("public");
             builder.Entity<RoleClaim>(builder =>
             {
-                //builder.HasOne(roleClaim => roleClaim.Role).WithMany(role => role.Claims).HasForeignKey(roleClaim => roleClaim.RoleId);
-                //builder.Property(x => x.RoleId).HasColumnName("RoleId");    //Prevent replicating same name
+                builder.HasOne(roleClaim => roleClaim.Role).WithMany(role => role.Claims).HasForeignKey(roleClaim => roleClaim.RoleId);
+                builder.Property(x => x.RoleId).HasColumnName("RoleId");    //Prevent replicating same name
                 builder.ToTable("RoleClaim", schema: IdentitySchemaName);
             });
             builder.Entity<Role>(builder =>
@@ -69,10 +74,12 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data
             #region Data Seeding
             if (Environment.IsDevelopment())
             {
-                using (SeedController seeder = new SeedController(builder))
-                {
-                    seeder.Execute();
-                }
+                //using (SeedController seeder = new SeedController(builder))
+                //{
+                //    seeder.Execute();
+                //}
+                using SeedController seeder = new SeedController(builder);
+                seeder.Execute();
             }
             #endregion
         }

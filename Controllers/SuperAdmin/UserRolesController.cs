@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using StartupProject_Asp.NetCore_PostGRE.Attributes;
+using StartupProject_Asp.NetCore_PostGRE.AuthorizationRequirement;
 using StartupProject_Asp.NetCore_PostGRE.Data.Enums;
 using StartupProject_Asp.NetCore_PostGRE.Data.Models.Identity;
 using StartupProject_Asp.NetCore_PostGRE.Models;
@@ -12,11 +12,12 @@ using System.Threading.Tasks;
 
 namespace StartupProject_Asp.NetCore_PostGRE.Controllers.SuperAdmin
 {
-    [AuthorizeRoles(ERole.SuperAdmin)]
+    [AuthorizePolicy(EClaim.SuperAdmin_All)]
     public class UserRolesController : Controller
     {
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<Role> _roleManager;
+
         public UserRolesController(UserManager<User> userManager, RoleManager<Role> roleManager)
         {
             _roleManager = roleManager;
@@ -24,7 +25,7 @@ namespace StartupProject_Asp.NetCore_PostGRE.Controllers.SuperAdmin
         }
         public async Task<IActionResult> Index()
         {
-            List<User> users = await _userManager.Users.ToListAsync();
+            List<User> users = await _userManager.Users.OrderBy(u => u.FirstName).ThenBy(u=> u.LastName).ToListAsync();
             List<UserRolesViewModel> userRolesViewModel = new List<UserRolesViewModel>();
             foreach (User user in users)
             {
@@ -42,6 +43,7 @@ namespace StartupProject_Asp.NetCore_PostGRE.Controllers.SuperAdmin
         {
             return new List<string>(await _userManager.GetRolesAsync(user));
         }
+        [HttpGet]
         public async Task<IActionResult> Manage(Guid userId)
         {
             ViewBag.userId = userId;
@@ -55,7 +57,7 @@ namespace StartupProject_Asp.NetCore_PostGRE.Controllers.SuperAdmin
             ViewBag.UserName = user.UserName;
             List<ManageUserRolesViewModel> model = new List<ManageUserRolesViewModel>();
 
-            foreach (Role role in _roleManager.Roles)
+            foreach (Role role in _roleManager.Roles.OrderBy(r=>r.Name))
             {
                 ManageUserRolesViewModel userRolesViewModel = new ManageUserRolesViewModel
                 {
@@ -75,6 +77,7 @@ namespace StartupProject_Asp.NetCore_PostGRE.Controllers.SuperAdmin
             }
             return View(model);
         }
+
         [HttpPost]
         public async Task<IActionResult> Manage(List<ManageUserRolesViewModel> model, string userId)
         {
@@ -83,17 +86,24 @@ namespace StartupProject_Asp.NetCore_PostGRE.Controllers.SuperAdmin
             {
                 return View();
             }
-            var roles = await _userManager.GetRolesAsync(user);
-            var result = await _userManager.RemoveFromRolesAsync(user, roles);
+            IList<string> roles = await _userManager.GetRolesAsync(user);
+            IdentityResult result = await _userManager.RemoveFromRolesAsync(user, roles);
             if (!result.Succeeded)
             {
                 ModelState.AddModelError("", "Cannot remove user existing roles");
                 return View(model);
             }
             result = await _userManager.AddToRolesAsync(user, model.Where(x => x.Selected).Select(y => y.RoleName));
+            IdentityResult result2 = await _userManager.UpdateSecurityStampAsync(user);    //Forcely Logout User
+
             if (!result.Succeeded)
             {
                 ModelState.AddModelError("", "Cannot add selected roles to user");
+                return View(model);
+            }
+            if (!result2.Succeeded)
+            {
+                ModelState.AddModelError("", "Cannot log out the user");
                 return View(model);
             }
             return RedirectToAction("Index");
