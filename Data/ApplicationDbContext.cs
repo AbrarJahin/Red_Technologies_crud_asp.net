@@ -32,7 +32,7 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data
             {
                 try
                 {
-                    this.Database.EnsureCreated();
+                    //this.Database.EnsureCreated();
                     this.Database.Migrate();
                 }
                 catch(Exception ex)
