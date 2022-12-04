@@ -22,6 +22,8 @@
     <Compile Remove="Data\Migrations\20201209150208_ApplicationTableAdded.Designer.cs" />
     <Compile Remove="Data\Migrations\20201209152302_LeaveApplicationAdded.cs" />
     <Compile Remove="Data\Migrations\20201209152302_LeaveApplicationAdded.Designer.cs" />
+    <Compile Remove="Data\Migrations\20221204115724_OrderTableCreate.cs" />
+    <Compile Remove="Data\Migrations\20221204115724_OrderTableCreate.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

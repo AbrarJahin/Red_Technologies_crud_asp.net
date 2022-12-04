@@ -14,6 +14,7 @@
     "inputFiles": [
       "wwwroot/lib/jquery/jquery.js",
       "wwwroot/lib/twitter-bootstrap/js/bootstrap.bundle.js",
+      "wwwroot/lib/jquery-cookie/jquery.cookie.js",
       "wwwroot/lib/jquery-validation/dist/jquery.validate.js",
       "wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
       "wwwroot/lib/microsoft-signalr/dist/browser/signalr.js",

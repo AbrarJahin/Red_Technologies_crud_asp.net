@@ -18,6 +18,10 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data
         #region Table List - Auth tables are added by default
         public DbSet<XmlFile> XmlFiles { get; set; }
         public DbSet<LeaveApplication> LeaveApplications { get; set; }
+
+        public DbSet<Product> Product { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderProduct> OrderProducts { get; set; }
         #endregion
 
         private string IdentitySchemaName = "Identity";

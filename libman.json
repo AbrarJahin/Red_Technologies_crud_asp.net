@@ -20,6 +20,13 @@
       ]
     },
     {
+      "library": "jquery-cookie@1.4.1",
+      "destination": "wwwroot/lib/jquery-cookie/",
+      "files": [
+        "jquery.cookie.js"
+      ]
+    },
+    {
       "provider": "jsdelivr",
       "library": "jquery-validation@1.19.2",
       "destination": "wwwroot/lib/jquery-validation/",
