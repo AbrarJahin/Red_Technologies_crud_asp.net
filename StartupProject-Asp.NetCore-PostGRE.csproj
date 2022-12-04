@@ -32,6 +32,7 @@
     <None Remove=".gitignore" />
     <None Remove="appsettings.json.example" />
     <None Remove="Coding Assessment.pdf" />
+    <None Remove="Data\App.db" />
   </ItemGroup>
 
   <ItemGroup>
