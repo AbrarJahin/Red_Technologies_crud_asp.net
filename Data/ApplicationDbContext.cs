@@ -28,6 +28,11 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data
         {
             Environment = env;
             //this.Database.EnsureCreated();
+            if (this.Database.GetPendingMigrations().Any())
+            {
+                this.Database.EnsureCreated();
+                this.Database.Migrate();
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
