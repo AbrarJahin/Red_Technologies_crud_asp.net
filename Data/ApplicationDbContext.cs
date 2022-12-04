@@ -30,8 +30,15 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data
             //this.Database.EnsureCreated();
             if (this.Database.GetPendingMigrations().Any())
             {
-                this.Database.EnsureCreated();
-                this.Database.Migrate();
+                try
+                {
+                    this.Database.EnsureCreated();
+                    this.Database.Migrate();
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
             }
         }
 
