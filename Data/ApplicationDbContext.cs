@@ -16,9 +16,6 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data
     public class ApplicationDbContext : IdentityDbContext<User, Role, Guid, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
     {
         #region Table List - Auth tables are added by default
-        public DbSet<XmlFile> XmlFiles { get; set; }
-        public DbSet<LeaveApplication> LeaveApplications { get; set; }
-
         public DbSet<Product> Product { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderProduct> OrderProducts { get; set; }
