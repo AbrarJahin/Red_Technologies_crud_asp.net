@@ -23,5 +23,14 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData
         #endregion
 
         public ICollection<OrderProduct> OrderProducts { get; set; }
+
+        [Column("OrderTotal"), Required(ErrorMessage = "Order Total required"), Range(0, Double.MaxValue, ErrorMessage = "The field {0} must be greater than {1}."), Display(Name = "Total Order Value", Prompt = "Please Give Order Total")]
+        public float OrderTotal { get; set; } = 0;
+
+        [Column("IsApproved"), Display(Name = "Order Approval Status", Prompt = "Please Select Approval Status")]
+        public bool IsApproved { get; set; } = false;
+
+        [Column("IsPaid"), Display(Name = "Payment Status", Prompt = "Please Select Payment Status")]
+        public bool IsPaid { get; set; } = false;
     }
 }
