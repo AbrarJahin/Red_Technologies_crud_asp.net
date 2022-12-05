@@ -73,18 +73,20 @@
 				</li>}
 					@if (User.IsInRole("Auditor"))
 					{
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAuditor" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Auditor
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdownAuditor">
-						<a class="dropdown-item" href="#">Action</a>
-						<a class="dropdown-item" href="#">Another action</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">Something else here</a>
-					</div>
-				</li>}
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAuditor" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Auditor
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdownAuditor">
+								<a class="dropdown-item" href="#">Action</a>
+								<a class="dropdown-item" href="#">Another action</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#">Something else here</a>
+							</div>
+						</li>
+					}
 					<partial name="_LoginPartial" />
+					@*Cart Icon is showing here*@
 					<li class="nav-item dropdown">
 						<a href="/users/edit">
 							<i id="cart_count" class="fa badge" value=0>&#xf07a;</i>
