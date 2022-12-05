@@ -26,13 +26,13 @@
     ],
     "minify": {
       "enabled": true,
-      "renameLocals": true,
+      "renameLocals": false,
       "keepOneSpaceWhenCollapsing": true,
       "preserveImportantComments": false,
-      "alwaysEscapeNonAscii": true,
+      "alwaysEscapeNonAscii": false,
       "commentMode": "none",
       "indentSize": 1
     },
-    "sourceMap": false
+    "sourceMap": true
   }
 ]
