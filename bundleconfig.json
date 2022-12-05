@@ -25,7 +25,7 @@
       "wwwroot/js/site.js"
     ],
     "minify": {
-      "enabled": true,
+      "enabled": false,
       "renameLocals": false,
       "keepOneSpaceWhenCollapsing": true,
       "preserveImportantComments": false,
