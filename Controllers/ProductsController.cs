@@ -1,28 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using StartupProject_Asp.NetCore_PostGRE.Data;
 using StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData;
+using StartupProject_Asp.NetCore_PostGRE.Data.Repository.Wrapper;
 
 namespace StartupProject_Asp.NetCore_PostGRE.Controllers
 {
-    public class ProductsController : Controller
+	public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private IRepositoryWrapper _repository;
 
-        public ProductsController(ApplicationDbContext context)
+        public ProductsController(ApplicationDbContext context, IRepositoryWrapper repository)
         {
             _context = context;
+            _repository = repository;
         }
 
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Product.ToListAsync());
+            var query = _repository.Product.FindAll();
+            var allProducts = query.ToListAsync();
+            var allProducts1 = await _context.Product.ToListAsync();
+            return View(allProducts.Result);
         }
 
         // GET: Products/Details/5

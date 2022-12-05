@@ -16,6 +16,7 @@ using WebMarkupMin.AspNetCore3;
 using StartupProject_Asp.NetCore_PostGRE.Data.Enums;
 using StartupProject_Asp.NetCore_PostGRE.AuthorizationRequirement;
 using Microsoft.AspNetCore.Authorization;
+using StartupProject_Asp.NetCore_PostGRE.Data.Repository.Wrapper;
 
 namespace StartupProject_Asp.NetCore_PostGRE
 {
@@ -57,6 +58,7 @@ namespace StartupProject_Asp.NetCore_PostGRE
                 //}
                 options.UseSqlite(Configuration.GetConnectionString("SqliteConnection"));
             });
+            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
             #endregion
             #region Identity Service Configuration
             services.AddIdentity<User, Role>(options => {
