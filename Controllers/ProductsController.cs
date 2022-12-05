@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using StartupProject_Asp.NetCore_PostGRE.Data;
 using StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData;
 using StartupProject_Asp.NetCore_PostGRE.Data.Repository.Wrapper;
 
@@ -50,24 +48,24 @@ namespace StartupProject_Asp.NetCore_PostGRE.Controllers
             return View();
         }
 
-        // POST: Products/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,UnitPrice,Id,CreateTime,LastUpdateTime,DeletionTime")] Product product)
-        {
-            if (ModelState.IsValid)
-            {
-                _repository.Product.Create(product);
-                _repository.SaveAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(product);
-        }
+		// POST: Products/Create
+		// To protect from overposting attacks, enable the specific properties you want to bind to, for 
+		// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public IActionResult Create([Bind("Name,UnitPrice,Id,CreateTime,LastUpdateTime,DeletionTime")] Product product)
+		{
+			if (ModelState.IsValid)
+			{
+				_repository.Product.Create(product);
+				_repository.SaveAsync();
+				return RedirectToAction(nameof(Index));
+			}
+			return View(product);
+		}
 
-        // GET: Products/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
+		// GET: Products/Edit/5
+		public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
             {
