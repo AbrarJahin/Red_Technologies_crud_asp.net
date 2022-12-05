@@ -53,12 +53,12 @@ namespace StartupProject_Asp.NetCore_PostGRE.Controllers
 		// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public IActionResult Create([Bind("Name,UnitPrice,Id,CreateTime,LastUpdateTime,DeletionTime")] Product product)
+		public async Task<IActionResult> CreateAsync([Bind("Name,UnitPrice,Id,CreateTime,LastUpdateTime,DeletionTime")] Product product)
 		{
 			if (ModelState.IsValid)
 			{
 				_repository.Product.Create(product);
-				_repository.SaveAsync();
+				await _repository.SaveAsync();
 				return RedirectToAction(nameof(Index));
 			}
 			return View(product);
@@ -98,7 +98,7 @@ namespace StartupProject_Asp.NetCore_PostGRE.Controllers
                 try
                 {
                     _repository.Product.Update(product);
-                    _repository.SaveAsync();
+                    await _repository.SaveAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -141,7 +141,7 @@ namespace StartupProject_Asp.NetCore_PostGRE.Controllers
         {
             var product = await _repository.Product.FindByIdAsync(id);
             _repository.Product.Delete(product);
-            _repository.SaveAsync();
+            await _repository.SaveAsync();
             return RedirectToAction(nameof(Index));
         }
 

@@ -52,7 +52,7 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Repository.Wrapper
 			}
 		}
 
-		public async void SaveAsync()
+		public async Task SaveAsync()
 		{
 			await _repoContext.SaveChangesAsync();
 		}

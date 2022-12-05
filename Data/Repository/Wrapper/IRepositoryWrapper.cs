@@ -1,4 +1,5 @@
 ﻿using StartupProject_Asp.NetCore_PostGRE.Data.Repository.RepositoryInterfaces;
+using System.Threading.Tasks;
 
 namespace StartupProject_Asp.NetCore_PostGRE.Data.Repository.Wrapper
 {
@@ -8,6 +9,6 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Repository.Wrapper
 		IOrderRepository Order { get; }
 		IProductRepository Product { get; }
 		IOrderProductRepository OrderProduct { get; }
-		void SaveAsync();
+		Task SaveAsync();
 	}
 }

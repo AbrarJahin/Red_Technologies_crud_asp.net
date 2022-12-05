@@ -22,7 +22,7 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData
         [Column("ProductId"), Display(Name = "Product Id", Prompt = "Please Choose Product Id")]
         public Guid? ProductId { get; set; }
         [ForeignKey("ProductId"), Display(Name = "Product", Prompt = "Please Select The Product")]
-        public virtual Order Product { get; set; }
+        public virtual Product Product { get; set; }
         #endregion
     }
 }

@@ -83,7 +83,18 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data
                 builder.ToTable("UserToken", schema: IdentitySchemaName);
             });
             #endregion
-
+            #region Many To Many Relationship of Order - Product
+            builder.Entity<OrderProduct>()
+                .HasKey(op => new { op.OrderId, op.ProductId });
+            builder.Entity<OrderProduct>()
+                .HasOne(op => op.Order)
+                .WithMany(o => o.OrderProducts)
+                .HasForeignKey(op => op.OrderId);
+            builder.Entity<OrderProduct>()
+                .HasOne(op => op.Product)
+                .WithMany(p => p.OrderProducts)
+                .HasForeignKey(op => op.ProductId);
+            #endregion
             #region Data Seeding
             if (Environment.IsDevelopment())
             {

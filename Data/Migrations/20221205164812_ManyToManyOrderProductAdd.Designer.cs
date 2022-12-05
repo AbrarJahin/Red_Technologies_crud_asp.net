@@ -9,97 +9,15 @@ using StartupProject_Asp.NetCore_PostGRE.Data;
 namespace StartupProject_Asp.NetCore_PostGRE.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221204122838_OrderDetailTableCreated")]
-    partial class OrderDetailTableCreated
+    [Migration("20221205164812_ManyToManyOrderProductAdd")]
+    partial class ManyToManyOrderProductAdd
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("public")
-                .HasAnnotation("ProductVersion", "3.1.10");
-
-            modelBuilder.Entity("StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData.LeaveApplication", b =>
-                {
-                    b.Property<Guid?>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("AddressDuringLeave")
-                        .IsRequired()
-                        .HasColumnName("AddressDuringLeave")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(32767);
-
-                    b.Property<Guid?>("ApplicantId")
-                        .HasColumnName("ApplicantId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("ApplicationStatus")
-                        .HasColumnName("ApplicationStatus")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime?>("CreateTime")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnName("CreateTime")
-                        .HasColumnType("TIMESTAMPTZ");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Designation")
-                        .IsRequired()
-                        .HasColumnName("Designation")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(32767);
-
-                    b.Property<Guid?>("LastSignedId")
-                        .HasColumnName("LastSignedId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("LastUpdateTime")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnName("LastUpdateTime")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("LeaveEnd")
-                        .HasColumnName("LeaveEnd")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("LeaveStart")
-                        .HasColumnName("LeaveStart")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("LeaveType")
-                        .HasColumnName("LeaveType")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnName("ApplicantName")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(32767);
-
-                    b.Property<string>("PhoneNoDuringLeave")
-                        .IsRequired()
-                        .HasColumnName("PhoneNoDuringLeave")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(11);
-
-                    b.Property<string>("PurposeOfLeave")
-                        .IsRequired()
-                        .HasColumnName("PurposeOfLeave")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(32767);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicantId");
-
-                    b.HasIndex("LastSignedId");
-
-                    b.ToTable("LeaveApplications");
-                });
+                .HasAnnotation("ProductVersion", "3.1.30");
 
             modelBuilder.Entity("StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData.Order", b =>
                 {
@@ -137,8 +55,12 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Migrations
 
             modelBuilder.Entity("StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData.OrderProduct", b =>
                 {
-                    b.Property<Guid?>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<Guid?>("OrderId")
+                        .HasColumnName("OrderId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("ProductId")
+                        .HasColumnName("ProductId")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("CreateTime")
@@ -149,26 +71,20 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Migrations
                     b.Property<DateTime?>("DeletionTime")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime?>("LastUpdateTime")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnName("LastUpdateTime")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid?>("OrderId")
-                        .HasColumnName("OrderId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid?>("ProductId")
-                        .HasColumnName("ProductId")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("UnitBought")
                         .HasColumnName("UnitBought")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
+                    b.HasKey("OrderId", "ProductId");
 
                     b.HasIndex("ProductId");
 
@@ -209,63 +125,6 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Migrations
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData.XmlFile", b =>
-                {
-                    b.Property<Guid?>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("CreateTime")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnName("CreateTime")
-                        .HasColumnType("TIMESTAMPTZ");
-
-                    b.Property<long>("DbEntryId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("FileContent")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasColumnName("FileContent")
-                        .HasColumnType("text");
-
-                    b.Property<string>("FileRealName")
-                        .IsRequired()
-                        .HasColumnName("FileRealName")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(32767);
-
-                    b.Property<bool>("IsAlreadyUsed")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime?>("LastUpdateTime")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnName("LastUpdateTime")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid?>("PreviousFileId")
-                        .HasColumnName("PreviousFileId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid?>("SignerId")
-                        .HasColumnName("SignerId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("TableName")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PreviousFileId");
-
-                    b.HasIndex("SignerId");
-
-                    b.ToTable("XmlFiles");
-                });
-
             modelBuilder.Entity("StartupProject_Asp.NetCore_PostGRE.Data.Models.Identity.Role", b =>
                 {
                     b.Property<Guid>("Id")
@@ -298,9 +157,9 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("052e0dd7-62e7-4ce9-98ce-f1521ebf1c93"),
-                            ConcurrencyStamp = "20faee4a-fbb2-4705-9d62-dac4798f5c45",
-                            Description = "12/4/2022 12:28:37 PM",
+                            Id = new Guid("9b2dc3de-2323-44bc-9d80-f2b1cb869e2c"),
+                            ConcurrencyStamp = "9b8e2c6d-a81a-4558-9b1c-f26e171f2596",
+                            Description = "12/5/2022 4:48:11 PM",
                             Name = "Super-Admin",
                             NormalizedName = "SUPER-ADMIN"
                         });
@@ -334,42 +193,42 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Migrations
                             Id = -1,
                             ClaimType = "SuperAdmin_All",
                             ClaimValue = "SuperAdmin.All",
-                            RoleId = new Guid("052e0dd7-62e7-4ce9-98ce-f1521ebf1c93")
+                            RoleId = new Guid("9b2dc3de-2323-44bc-9d80-f2b1cb869e2c")
                         },
                         new
                         {
                             Id = -2,
                             ClaimType = "Role_Create",
                             ClaimValue = "Role.Create",
-                            RoleId = new Guid("052e0dd7-62e7-4ce9-98ce-f1521ebf1c93")
+                            RoleId = new Guid("9b2dc3de-2323-44bc-9d80-f2b1cb869e2c")
                         },
                         new
                         {
                             Id = -3,
                             ClaimType = "Role_Read",
                             ClaimValue = "Role.Read",
-                            RoleId = new Guid("052e0dd7-62e7-4ce9-98ce-f1521ebf1c93")
+                            RoleId = new Guid("9b2dc3de-2323-44bc-9d80-f2b1cb869e2c")
                         },
                         new
                         {
                             Id = -4,
                             ClaimType = "Role_Update",
                             ClaimValue = "Role.Update",
-                            RoleId = new Guid("052e0dd7-62e7-4ce9-98ce-f1521ebf1c93")
+                            RoleId = new Guid("9b2dc3de-2323-44bc-9d80-f2b1cb869e2c")
                         },
                         new
                         {
                             Id = -5,
                             ClaimType = "Role_Delete",
                             ClaimValue = "Role.Delete",
-                            RoleId = new Guid("052e0dd7-62e7-4ce9-98ce-f1521ebf1c93")
+                            RoleId = new Guid("9b2dc3de-2323-44bc-9d80-f2b1cb869e2c")
                         },
                         new
                         {
                             Id = -6,
                             ClaimType = "Claim_Create",
                             ClaimValue = "Claim.Create",
-                            RoleId = new Guid("052e0dd7-62e7-4ce9-98ce-f1521ebf1c93")
+                            RoleId = new Guid("9b2dc3de-2323-44bc-9d80-f2b1cb869e2c")
                         });
                 });
 
@@ -452,9 +311,9 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("6fd7bb62-ec92-4bb6-bc65-f6ae02c3785b"),
+                            Id = new Guid("0f963845-d982-488a-9ed0-c8195478bb42"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "890155d1-5d01-477b-b4c9-ee0716d659d9",
+                            ConcurrencyStamp = "1db4f3a8-fe44-40b4-8500-5b38d077f03e",
                             Email = "abrar@jahin.com",
                             EmailConfirmed = true,
                             FirstName = "Abrar",
@@ -462,9 +321,9 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ABRAR@JAHIN.COM",
                             NormalizedUserName = "ABRAR",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEYxVYlJwrirRmWd5Lz3TOttobcdlwbtrsKHWBcgMj0+H1ZThOtNcuvRsRVa24jRAw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEE80astDy6g+qlyP+/JYhBRENB6bNB+DNSfelHKiYvRbCr4jL/stwaxJpERgLrjfdQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "638057357176894977_647d32e0-cbaf-40e9-84c0-b5b80bf2ad2b",
+                            SecurityStamp = "638058376918452194_6be5ca32-7292-46a4-aeac-3ac414a0d02b",
                             TwoFactorEnabled = false,
                             UserName = "abrar",
                             UsernameChangeLimit = 10
@@ -503,42 +362,42 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Migrations
                             Id = -1,
                             ClaimType = "SuperAdmin_All",
                             ClaimValue = "SuperAdmin.All",
-                            UserId = new Guid("6fd7bb62-ec92-4bb6-bc65-f6ae02c3785b")
+                            UserId = new Guid("0f963845-d982-488a-9ed0-c8195478bb42")
                         },
                         new
                         {
                             Id = -2,
                             ClaimType = "Role_Create",
                             ClaimValue = "Role.Create",
-                            UserId = new Guid("6fd7bb62-ec92-4bb6-bc65-f6ae02c3785b")
+                            UserId = new Guid("0f963845-d982-488a-9ed0-c8195478bb42")
                         },
                         new
                         {
                             Id = -3,
                             ClaimType = "Role_Read",
                             ClaimValue = "Role.Read",
-                            UserId = new Guid("6fd7bb62-ec92-4bb6-bc65-f6ae02c3785b")
+                            UserId = new Guid("0f963845-d982-488a-9ed0-c8195478bb42")
                         },
                         new
                         {
                             Id = -4,
                             ClaimType = "Role_Update",
                             ClaimValue = "Role.Update",
-                            UserId = new Guid("6fd7bb62-ec92-4bb6-bc65-f6ae02c3785b")
+                            UserId = new Guid("0f963845-d982-488a-9ed0-c8195478bb42")
                         },
                         new
                         {
                             Id = -5,
                             ClaimType = "Role_Delete",
                             ClaimValue = "Role.Delete",
-                            UserId = new Guid("6fd7bb62-ec92-4bb6-bc65-f6ae02c3785b")
+                            UserId = new Guid("0f963845-d982-488a-9ed0-c8195478bb42")
                         },
                         new
                         {
                             Id = -6,
                             ClaimType = "Claim_Create",
                             ClaimValue = "Claim.Create",
-                            UserId = new Guid("6fd7bb62-ec92-4bb6-bc65-f6ae02c3785b")
+                            UserId = new Guid("0f963845-d982-488a-9ed0-c8195478bb42")
                         });
                 });
 
@@ -601,8 +460,8 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("6fd7bb62-ec92-4bb6-bc65-f6ae02c3785b"),
-                            RoleId = new Guid("052e0dd7-62e7-4ce9-98ce-f1521ebf1c93"),
+                            UserId = new Guid("0f963845-d982-488a-9ed0-c8195478bb42"),
+                            RoleId = new Guid("9b2dc3de-2323-44bc-9d80-f2b1cb869e2c"),
                             ReasonForAdding = "Created During Migration"
                         });
                 });
@@ -631,17 +490,6 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Migrations
                     b.ToTable("UserToken","Identity");
                 });
 
-            modelBuilder.Entity("StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData.LeaveApplication", b =>
-                {
-                    b.HasOne("StartupProject_Asp.NetCore_PostGRE.Data.Models.Identity.User", "Applicant")
-                        .WithMany()
-                        .HasForeignKey("ApplicantId");
-
-                    b.HasOne("StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData.XmlFile", "PreviousSignedFile")
-                        .WithMany()
-                        .HasForeignKey("LastSignedId");
-                });
-
             modelBuilder.Entity("StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData.Order", b =>
                 {
                     b.HasOne("StartupProject_Asp.NetCore_PostGRE.Data.Models.Identity.User", "Customer")
@@ -652,23 +500,16 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Migrations
             modelBuilder.Entity("StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData.OrderProduct", b =>
                 {
                     b.HasOne("StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId");
+                        .WithMany("OrderProducts")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData.Order", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId");
-                });
-
-            modelBuilder.Entity("StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData.XmlFile", b =>
-                {
-                    b.HasOne("StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData.XmlFile", "PreviousSignedFile")
-                        .WithMany()
-                        .HasForeignKey("PreviousFileId");
-
-                    b.HasOne("StartupProject_Asp.NetCore_PostGRE.Data.Models.Identity.User", "Signer")
-                        .WithMany()
-                        .HasForeignKey("SignerId");
+                    b.HasOne("StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData.Product", "Product")
+                        .WithMany("OrderProducts")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("StartupProject_Asp.NetCore_PostGRE.Data.Models.Identity.RoleClaim", b =>

@@ -1,6 +1,7 @@
 ﻿using StartupProject_Asp.NetCore_PostGRE.Data.Enums;
 using StartupProject_Asp.NetCore_PostGRE.Data.Models.Identity;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -20,5 +21,7 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData
         [ForeignKey("CustomerId"), Display(Name = "Customer", Prompt = "Please Select The Customer Who Made The Order")]
         public virtual User Customer { get; set; }
         #endregion
+
+        public ICollection<OrderProduct> OrderProducts { get; set; }
     }
 }
