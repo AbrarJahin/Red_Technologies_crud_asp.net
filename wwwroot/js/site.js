@@ -11,11 +11,30 @@ $(document).ready(function () {
         for (var i in cart) {
             idList.push(cart[i][0]);
             countList.push(cart[i][1]);
-            AddRowForItem(formSelector, cart[i][0], cart[i][1]);
+            AddRowForItem(formSelector, cart[i][0], cart[i][1], i);
         }
         console.log(idList);
         console.log(countList);
-
+        $('form#cart_items_list').submit(function (e) {
+            e.preventDefault(); // Stop the form submitting
+            $.ajax({
+                type: "POST",
+                url: $(this).attr('action'),
+                data: $(this).serialize(), // serializes the form's elements.
+                success: function (data) {
+                    ClearCart();
+                    alert("Order Placed Successfully !");
+                    window.location.replace($('meta[name=redirect-url]').attr('content'));
+                    //location.reload();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert("Data Update Failed !");
+                    console.log(xhr.status);
+                    console.log(thrownError);
+                }
+            });
+            //e.currentTarget.submit();// Now submit it
+        });
         //e.preventDefault(); // avoid to execute the actual submit of the form.
         //$.ajax({
         //    type: "POST",
@@ -231,7 +250,7 @@ function FindIndexOfElement(cart, productId) {
     return targetIndex;
 }
 
-function AddRowForItem(formSelector, itemId, itemCount) {
-    var text = '<div class="row"><div class="col-md-8 mb-6"><div class="form-outline"><input type="text" name="id[]" class="form-control form-control-lg" value="' + itemId + '" readonly /><label class="form-label" for="ProdName">Product Id</label></div></div><div class="col-md-4 mb-3"><div class="form-outline"><input type="text" name="count[]" class="form-control form-control-lg" value="' + itemCount + '" readonly /><label class="form-label" for="Count">Count</label></div></div></div>';
+function AddRowForItem(formSelector, itemId, itemCount, index) {
+    var text = '<div class="row"><div class="col-md-8 mb-6"><div class="form-outline"><input type="text" name="id[' + index + ']" class="form-control form-control-lg" value="' + itemId + '" readonly /><label class="form-label" for="ProdName">Product Id</label></div></div><div class="col-md-4 mb-3"><div class="form-outline"><input type="text" name="count[' + index +']" class="form-control form-control-lg" value="' + itemCount + '" readonly /><label class="form-label" for="Count">Count</label></div></div></div>';
     $(formSelector).append(text);
 }

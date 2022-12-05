@@ -10,28 +10,30 @@
 	<h4>Order From Cart</h4>
 	<hr />
 
-	<form id="cart_items_list" asp-area="" asp-controller="UserOrderApi" asp-action="GetProductUnitPrice">
+	<meta name="redirect-url" content="@Url.Action("Index", "UserOrder")" />
+
+	<form id="cart_items_list" asp-area="" asp-controller="UserOrderApi" asp-action="PlaceOrder">
 		<div id="cart_items_list_wrapper">
 			@*<div class="row">
-				<div class="col-md-4 mb-3">
-					<div class="form-outline">
-						<input type="text" name="id[]" class="form-control form-control-lg" name-id="" value="" readonly />
-						<label class="form-label" for="ProdName">Product Name</label>
+					<div class="col-md-4 mb-3">
+						<div class="form-outline">
+							<input type="text" name="id[]" class="form-control form-control-lg" name-id="" value="" readonly />
+							<label class="form-label" for="ProdName">Product Name</label>
+						</div>
 					</div>
-				</div>
-				<div class="col-md-4 mb-3">
-					<div class="form-outline">
-						<input type="text" name="count[]" class="form-control form-control-lg" count-id="" value="" readonly />
-						<label class="form-label" for="Count">Count</label>
+					<div class="col-md-4 mb-3">
+						<div class="form-outline">
+							<input type="text" name="count[]" class="form-control form-control-lg" count-id="" value="" readonly />
+							<label class="form-label" for="Count">Count</label>
+						</div>
 					</div>
-				</div>
-				<div class="col-md-4 mb-3">
-					<div class="form-outline">
-						<input type="text" class="form-control form-control-lg" unit-price-id="" value="" readonly />
-						<label class="form-label" for="UnitPrice">Unit Price</label>
+					<div class="col-md-4 mb-3">
+						<div class="form-outline">
+							<input type="text" class="form-control form-control-lg" unit-price-id="" value="" readonly />
+							<label class="form-label" for="UnitPrice">Unit Price</label>
+						</div>
 					</div>
-				</div>
-			</div>*@
+				</div>*@
 		</div>
 
 		<div class="mt-4 pt-2">

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData;
@@ -13,7 +14,8 @@ using System.Threading.Tasks;
 
 namespace StartupProject_Asp.NetCore_PostGRE.Controllers.Api
 {
-	[Route("api/[controller]")]
+    [Authorize]
+    [Route("api/[controller]")]
 	[ApiController]
 	public class ProductApiController : ControllerBase
 	{

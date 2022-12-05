@@ -3,6 +3,11 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn more about <a href="https://redtechnologiesinc.com/">Red Technologies</a>.</p>
+	<h1 class="display-4">Welcome</h1>
+	@if (!User.Identity.IsAuthenticated)
+	{
+		<a class="nav-link">Please Login To Add Item Into Cart</a>
+	}
+
+	<p>Learn more about <a href="https://redtechnologiesinc.com/">Red Technologies</a>.</p>
 </div>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData;
@@ -8,7 +9,8 @@ using StartupProject_Asp.NetCore_PostGRE.Data.Repository.Wrapper;
 
 namespace StartupProject_Asp.NetCore_PostGRE.Controllers
 {
-	public class OrdersController : Controller
+    [Authorize]
+    public class OrdersController : Controller
     {
         private readonly IRepositoryWrapper _repository;
 

@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StartupProject_Asp.NetCore_PostGRE.Data.Repository.Wrapper;
 
 namespace StartupProject_Asp.NetCore_PostGRE.Controllers
 {
+	[Authorize]
 	public class UserOrderController : Controller
     {
         private readonly IRepositoryWrapper _repository;
