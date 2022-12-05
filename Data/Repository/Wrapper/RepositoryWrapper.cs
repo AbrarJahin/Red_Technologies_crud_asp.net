@@ -1,5 +1,6 @@
 ﻿using StartupProject_Asp.NetCore_PostGRE.Data.Repository.DbRepository;
 using StartupProject_Asp.NetCore_PostGRE.Data.Repository.RepositoryInterfaces;
+using System.Threading.Tasks;
 
 namespace StartupProject_Asp.NetCore_PostGRE.Data.Repository.Wrapper
 {
@@ -51,9 +52,9 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Repository.Wrapper
 			}
 		}
 
-		public void Save()
+		public async void SaveAsync()
 		{
-			_repoContext.SaveChangesAsync();
+			await _repoContext.SaveChangesAsync();
 		}
 	}
 }

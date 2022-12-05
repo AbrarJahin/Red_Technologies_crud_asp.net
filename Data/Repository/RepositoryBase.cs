@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace StartupProject_Asp.NetCore_PostGRE.Data.Repository
 {
@@ -19,9 +20,21 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Repository
         public void Update(T entity) => _repositoryContext.Set<T>().Update(entity);
         public void Delete(T entity) => _repositoryContext.Set<T>().Remove(entity);
 
-		public IQueryable<T> FindInRange(int firstPageIndex, int itemPerPage)
+		public IQueryable<T> FindInRange(int firstPageIndex = 0, int itemPerPage = 10)
 		{
-			throw new NotImplementedException();
+            return _repositoryContext.Set<T>().Skip(firstPageIndex * itemPerPage).Take(itemPerPage);
 		}
+
+		public async Task<T> FindByIdAsync(Guid? id)
+		{
+            return await _repositoryContext.Set<T>().FindAsync(id);
+        }
+
+		public async Task<bool> IfExistsAsync(Guid? id)
+		{
+            //var a= await _repositoryContext.Set<T>().Any(e => (Guid?)e.Id == id);
+            T item = await _repositoryContext.Set<T>().FindAsync(id);
+            return item != null;
+        }
 	}
 }

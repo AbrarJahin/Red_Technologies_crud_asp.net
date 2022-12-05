@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -11,22 +12,18 @@ namespace StartupProject_Asp.NetCore_PostGRE.Controllers
 {
 	public class ProductsController : Controller
     {
-        private readonly ApplicationDbContext _context;
-        private IRepositoryWrapper _repository;
+        private readonly IRepositoryWrapper _repository;
 
-        public ProductsController(ApplicationDbContext context, IRepositoryWrapper repository)
+        public ProductsController(IRepositoryWrapper repository)
         {
-            _context = context;
             _repository = repository;
         }
 
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            var query = _repository.Product.FindAll();
-            var allProducts = query.ToListAsync();
-            var allProducts1 = await _context.Product.ToListAsync();
-            return View(allProducts.Result);
+            List<Product> allProducts = await _repository.Product.FindAll().ToListAsync();
+            return View(allProducts);
         }
 
         // GET: Products/Details/5
@@ -37,7 +34,7 @@ namespace StartupProject_Asp.NetCore_PostGRE.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Product
+            Product product = await _repository.Product.FindAll()
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (product == null)
             {
@@ -62,8 +59,8 @@ namespace StartupProject_Asp.NetCore_PostGRE.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(product);
-                await _context.SaveChangesAsync();
+                _repository.Product.Create(product);
+                _repository.SaveAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(product);
@@ -77,7 +74,8 @@ namespace StartupProject_Asp.NetCore_PostGRE.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Product.FindAsync(id);
+            //var product = await _repository.Product.FindAll().FindAsync(id);
+            Product product = await _repository.Product.FindByIdAsync(id);
             if (product == null)
             {
                 return NotFound();
@@ -101,12 +99,12 @@ namespace StartupProject_Asp.NetCore_PostGRE.Controllers
             {
                 try
                 {
-                    _context.Update(product);
-                    await _context.SaveChangesAsync();
+                    _repository.Product.Update(product);
+                    _repository.SaveAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductExists(product.Id))
+                    if (!await ProductExistsAsync(product.Id))
                     {
                         return NotFound();
                     }
@@ -128,8 +126,8 @@ namespace StartupProject_Asp.NetCore_PostGRE.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Product
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var product = await _repository.Product
+                .FindByIdAsync(id);
             if (product == null)
             {
                 return NotFound();
@@ -143,15 +141,16 @@ namespace StartupProject_Asp.NetCore_PostGRE.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid? id)
         {
-            var product = await _context.Product.FindAsync(id);
-            _context.Product.Remove(product);
-            await _context.SaveChangesAsync();
+            var product = await _repository.Product.FindByIdAsync(id);
+            _repository.Product.Delete(product);
+            _repository.SaveAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProductExists(Guid? id)
+        private async Task<bool> ProductExistsAsync(Guid? id)
         {
-            return _context.Product.Any(e => e.Id == id);
+            //return _context.Product.Any(e => e.Id == id);
+            return await _repository.Product.IfExistsAsync(id);
         }
     }
 }

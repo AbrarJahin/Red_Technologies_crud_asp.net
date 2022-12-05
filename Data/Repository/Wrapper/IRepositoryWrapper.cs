@@ -8,6 +8,6 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Repository.Wrapper
 		IOrderRepository Order { get; }
 		IProductRepository Product { get; }
 		IOrderProductRepository OrderProduct { get; }
-		void Save();
+		void SaveAsync();
 	}
 }

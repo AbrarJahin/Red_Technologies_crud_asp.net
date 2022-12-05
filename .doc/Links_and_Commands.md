@@ -62,3 +62,8 @@ Should store and verify data after all data is provided by the user.
 ## JS, CSS, HTML Minifire Config-
 
 https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+
+
+## Repository Pattern with DBContext-
+
+https://code-maze.com/net-core-web-development-part4/
