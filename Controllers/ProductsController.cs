@@ -17,15 +17,15 @@ namespace StartupProject_Asp.NetCore_PostGRE.Controllers
             _repository = repository;
         }
 
-        // GET: Products
-        public async Task<IActionResult> Index()
-        {
-            List<Product> allProducts = await _repository.Product.FindAll().ToListAsync();
-            return View(allProducts);
-        }
+		// GET: Products
+		public IActionResult Index()
+		{
+			//List<Product> allProducts = await _repository.Product.FindAll().ToListAsync();
+			return View();
+		}
 
-        // GET: Products/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+		// GET: Products/Details/5
+		public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
             {

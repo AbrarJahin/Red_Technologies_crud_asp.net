@@ -1,12 +1,12 @@
 ﻿//Site Specific Works
 $(document).ready(function () {
 
-    /////////////////////////////////Datatable for Showing self previous application
-    if ($('#self-previous-applications-datatable').length > 0) {
+    /////////////////////////////////Datatable for Showing Products
+    if ($('#all-products-datatable').length > 0) {
         //Datatable with ID exists
-        $('#self-previous-applications-datatable').DataTable({
+        $('#all-products-datatable').DataTable({
             bLengthChange: true,
-            lengthMenu: [[5, 10, -1], [5, 10, "All"]],
+            lengthMenu: [[5, 10, 50, 100, -1], [5, 10, 50, 100, "All"]],
             bFilter: true,
             bSort: true,
             bPaginate: true,
@@ -25,10 +25,8 @@ $(document).ready(function () {
             //    "orderable": false
             //}],
             "columns": [
-                { "data": "leaveStart", "name": "Leave Start", "autoWidth": true },
-                { "data": "leaveEnd", "name": "Leave End", "autoWidth": true },
-                { "data": "leaveType", "name": "Leave Type", "autoWidth": true },
-                { "data": "applicationStatus", "name": "Application Status", "autoWidth": true },
+                { "data": "name", "name": "Name", "autoWidth": true },
+                { "data": "unitPrice", "name": "Unit Price", "autoWidth": true },
                 {
                     "data": "id",
                     "name": "Id",
