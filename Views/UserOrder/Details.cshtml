@@ -4,45 +4,42 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Cart Items</h1>
 
 <div>
-    <h4>Order</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OrderType)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OrderType)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Customer)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Customer.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreateTime)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreateTime)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LastUpdateTime)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LastUpdateTime)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DeletionTime)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DeletionTime)
-        </dd>
-    </dl>
+	<h4>Order From Cart</h4>
+	<hr />
+
+	<form id="cart_items_list" asp-area="" asp-controller="UserOrderApi" asp-action="GetProductUnitPrice">
+		<div id="cart_items_list_wrapper">
+			@*<div class="row">
+				<div class="col-md-4 mb-3">
+					<div class="form-outline">
+						<input type="text" name="id[]" class="form-control form-control-lg" name-id="" value="" readonly />
+						<label class="form-label" for="ProdName">Product Name</label>
+					</div>
+				</div>
+				<div class="col-md-4 mb-3">
+					<div class="form-outline">
+						<input type="text" name="count[]" class="form-control form-control-lg" count-id="" value="" readonly />
+						<label class="form-label" for="Count">Count</label>
+					</div>
+				</div>
+				<div class="col-md-4 mb-3">
+					<div class="form-outline">
+						<input type="text" class="form-control form-control-lg" unit-price-id="" value="" readonly />
+						<label class="form-label" for="UnitPrice">Unit Price</label>
+					</div>
+				</div>
+			</div>*@
+		</div>
+
+		<div class="mt-4 pt-2">
+			<input class="btn btn-primary btn-lg" type="submit" value="Place Order" />
+		</div>
+
+	</form>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Back to Add More Item</a>
 </div>

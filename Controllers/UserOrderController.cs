@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using StartupProject_Asp.NetCore_PostGRE.Data.Repository.Wrapper;
 
 namespace StartupProject_Asp.NetCore_PostGRE.Controllers
@@ -23,22 +20,22 @@ namespace StartupProject_Asp.NetCore_PostGRE.Controllers
 			return View();
 		}
 
-		// GET: UserOrder/Details/5
-		public async Task<IActionResult> Details(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+		// GET: UserOrder/Details/
+		public IActionResult Details()
+		{
+			//if (id == null)
+			//{
+			//    return NotFound();
+			//}
 
-            var order = await _repository.Order.IncludeCustomer()
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (order == null)
-            {
-                return NotFound();
-            }
+			//var order = await _repository.Order.IncludeCustomer()
+			//    .FirstOrDefaultAsync(m => m.Id == id);
+			//if (order == null)
+			//{
+			//    return NotFound();
+			//}
 
-            return View(order);
-        }
-    }
+			return View();
+		}
+	}
 }

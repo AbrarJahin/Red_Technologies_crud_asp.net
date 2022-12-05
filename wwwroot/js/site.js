@@ -2,6 +2,38 @@
 $(document).ready(function () {
     UpdateCartCountInUi();
 
+    /////////////////////////////////Load All Cart Element From Cookey WIth Updated Price From Server - Start
+    if ($('#cart_items_list').length > 0) {
+        var cart = GetCart();
+        var idList = [];
+        var countList = [];
+        var formSelector = "#cart_items_list_wrapper";
+        for (var i in cart) {
+            idList.push(cart[i][0]);
+            countList.push(cart[i][1]);
+            AddRowForItem(formSelector, cart[i][0], cart[i][1]);
+        }
+        console.log(idList);
+        console.log(countList);
+
+        //e.preventDefault(); // avoid to execute the actual submit of the form.
+        //$.ajax({
+        //    type: "POST",
+        //    url: $('#cart_items_list').attr('action'),
+        //    data: $(this).serialize(), // serializes the form's elements.
+        //    success: function (data) {
+        //        console.log("Data Updated Successfully !");
+        //        //location.reload();
+        //    },
+        //    error: function (xhr, ajaxOptions, thrownError) {
+        //        alert("Data Update Failed !");
+        //        console.log(xhr.status);
+        //        console.log(thrownError);
+        //    }
+        //});
+	}
+    /////////////////////////////////Load All Cart Element From Cookey WIth Updated Price From Server - End
+
     /////////////////////////////////Datatable for Showing Products
     if ($('#all-products-datatable').length > 0) {
         //Datatable with ID exists
@@ -132,6 +164,11 @@ function GetCart() {
     return cart;
 };
 
+function ClearCart() {
+    $.cookie("cart", []);
+    UpdateCartCountInUi();
+};
+
 function UpdateCartCountInUi(cart = null) {
     var cartCount = 0;
     if (cart == null) {
@@ -192,4 +229,9 @@ function FindIndexOfElement(cart, productId) {
         }
     });
     return targetIndex;
+}
+
+function AddRowForItem(formSelector, itemId, itemCount) {
+    var text = '<div class="row"><div class="col-md-8 mb-6"><div class="form-outline"><input type="text" name="id[]" class="form-control form-control-lg" value="' + itemId + '" readonly /><label class="form-label" for="ProdName">Product Id</label></div></div><div class="col-md-4 mb-3"><div class="form-outline"><input type="text" name="count[]" class="form-control form-control-lg" value="' + itemCount + '" readonly /><label class="form-label" for="Count">Count</label></div></div></div>';
+    $(formSelector).append(text);
 }
