@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using StartupProject_Asp.NetCore_PostGRE.Data.Enums;
 using StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData;
 using StartupProject_Asp.NetCore_PostGRE.Data.Models.Identity;
 using StartupProject_Asp.NetCore_PostGRE.Data.Repository.RepositoryInterfaces;
@@ -42,11 +43,11 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Repository.DbRepository
 					.ThenInclude(op => op.Product);
 		}
 
-		public async Task PlaceOrder(List<Guid?> id, List<int> count, User loggedInUser)
+		public async Task PlaceOrder(List<Guid?> id, List<int> count, User loggedInUser, EOrderType orderType)
 		{
 			float total = 0;
 			Order order = new Order();
-			order.OrderType = Data.Enums.EOrderType.Standard;
+			order.OrderType = orderType;
 			order.Customer = loggedInUser;
 			await _repoContext.SaveChangesAsync();
 			order.OrderProducts = new List<OrderProduct>();

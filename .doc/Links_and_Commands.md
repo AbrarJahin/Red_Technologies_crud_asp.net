@@ -12,7 +12,7 @@
 	- Update-Database –Migration <name of last good migration>	#Restore from a good migration - example: "Update-Database –Migration InitialMigration"
     - Drop-Database		#Drop The Database
 
-## Run Migration In Linux - 
+## Run Migration In Linux -
 
 - dotnet tool install --global dotnet-ef
 - dotnet ef database update -- --environment Production

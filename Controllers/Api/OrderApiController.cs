@@ -121,7 +121,7 @@ namespace StartupProject_Asp.NetCore_PostGRE.Controllers.Api
                                     .Select(product => new {
                                         product.Id,
                                         Customer = product.Customer.FullName,
-                                        OrderType = product.OrderType,
+                                        OrderType = ((EOrderType)product.OrderType).Description(),
                                         IsApproved = product.IsApproved,
                                         IsPaid = product.IsPaid,
                                         OrderTotal = product.OrderTotal.ToString("C2")

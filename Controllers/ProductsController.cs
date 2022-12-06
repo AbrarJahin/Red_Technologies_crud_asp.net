@@ -55,7 +55,7 @@ namespace StartupProject_Asp.NetCore_PostGRE.Controllers
 		// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> CreateAsync([Bind("Name,UnitPrice,Id,CreateTime,LastUpdateTime,DeletionTime")] Product product)
+		public async Task<IActionResult> CreateAsync([Bind("Name,UnitPrice,Id,AvailableUnit")] Product product)
 		{
 			if (ModelState.IsValid)
 			{

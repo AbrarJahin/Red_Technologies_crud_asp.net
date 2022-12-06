@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using StartupProject_Asp.NetCore_PostGRE.Data.Enums;
 using StartupProject_Asp.NetCore_PostGRE.Data.Models.Identity;
 using StartupProject_Asp.NetCore_PostGRE.Data.Repository.Wrapper;
 using System;
@@ -27,12 +28,12 @@ namespace StartupProject_Asp.NetCore_PostGRE.Controllers.Api
 		}
 		// POST api/<UserOrderApiController>
 		[HttpPost]
-		public async Task<IActionResult> PlaceOrderAsync([FromForm] List<Guid?> id, [FromForm] List<int> count)
+		public async Task<IActionResult> PlaceOrderAsync([FromForm] List<Guid?> id, [FromForm] List<int> count, [FromForm] EOrderType OrderType)
 		{
 			try
 			{
 				User loggedInUser = await _userManager.GetUserAsync(HttpContext.User);
-				await _repository.Order.PlaceOrder(id, count, loggedInUser);
+				await _repository.Order.PlaceOrder(id, count, loggedInUser, OrderType);
 				await _repository.SaveAsync();
 				return Ok("Order Placed Successfully");
 			}

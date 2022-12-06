@@ -13,7 +13,7 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData
 		[Column("UnitPrice"), Required(ErrorMessage = "Product Unit Price required"), Range(0.0, Double.MaxValue, ErrorMessage = "The field {0} must be greater than {1}."), Display(Name = "Unit Price of the Product", Prompt = "Please Give Product Unit Price")]
 		public float UnitPrice { get; set; }
 
-		[Column("AvailableUnit"), Required(ErrorMessage = "Available Unit Count required"), Range(0, Int32.MaxValue, ErrorMessage = "The field {0} must be greater than {1}."), Display(Name = "Unit Price of the Product", Prompt = "Please Give Product Count")]
+		[Column("AvailableUnit"), Required(ErrorMessage = "Available Unit Count required"), Range(0, Int32.MaxValue, ErrorMessage = "The field {0} must be greater than {1}."), Display(Name = "Available Unit", Prompt = "Please Give Product Count")]
 		public int AvailableUnit { get; set; } = 1;
 
 		public virtual ICollection<OrderProduct> OrderProducts { get; set; }

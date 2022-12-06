@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using StartupProject_Asp.NetCore_PostGRE.Data.Enums;
 using StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData;
 using StartupProject_Asp.NetCore_PostGRE.Data.Models.Identity;
 using System;
@@ -13,6 +14,6 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Repository.RepositoryInterface
 		IQueryable<Order> IncludeCustomerAndProduct();
 		IQueryable<Order> IncludeCustomer();
 		IQueryable<Order> IncludeProduct();
-		Task PlaceOrder(List<Guid?> id, List<int> count, User loggedInUser);
+		Task PlaceOrder(List<Guid?> id, List<int> count, User loggedInUser, EOrderType orderType);
 	}
 }

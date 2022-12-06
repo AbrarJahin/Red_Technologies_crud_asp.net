@@ -60,11 +60,11 @@ namespace StartupProject_Asp.NetCore_PostGRE.Controllers.Api
                     {
                         if (String.Equals(sortColumnDirection, "asc"))
                         {
-                            productData = productData.OrderBy(c => c.Name);
+                            productData = productData.OrderBy(c => c.Name.ToLower());
                         }
                         else
                         {
-                            productData = productData.OrderByDescending(c => c.Name);
+                            productData = productData.OrderByDescending(c => c.Name.ToLower());
                         }
                     }
                     else if (unitPriceString.Equals(sortColumn))
@@ -76,6 +76,17 @@ namespace StartupProject_Asp.NetCore_PostGRE.Controllers.Api
                         else
                         {
                             productData = productData.OrderByDescending(c => c.UnitPrice);
+                        }
+                    }
+                    else if ("Available Unit".Equals(sortColumn))
+                    {
+                        if (String.Equals(sortColumnDirection, "asc"))
+                        {
+                            productData = productData.OrderBy(c => c.AvailableUnit);
+                        }
+                        else
+                        {
+                            productData = productData.OrderByDescending(c => c.AvailableUnit);
                         }
                     }
                 }
@@ -92,6 +103,7 @@ namespace StartupProject_Asp.NetCore_PostGRE.Controllers.Api
                                     .Select(product => new {
                                         product.Id,
                                         Name = product.Name,
+                                        AvailableUnit = product.AvailableUnit,
                                         //LeaveType = ((ELeaveType)product.LeaveType).DesplayName(),
                                         UnitPrice = product.UnitPrice.ToString("C2")
                                     })

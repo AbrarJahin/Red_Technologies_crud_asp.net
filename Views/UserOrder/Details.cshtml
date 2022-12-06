@@ -1,7 +1,8 @@
 ﻿@model StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData.Order
+@using StartupProject_Asp.NetCore_PostGRE.Data.Enums
 
 @{
-    ViewData["Title"] = "Details";
+	ViewData["Title"] = "Details";
 }
 
 <h1>Cart Items</h1>
@@ -36,6 +37,10 @@
 				</div>*@
 		</div>
 
+		<select asp-for="OrderType" asp-items="Html.GetEnumSelectList<EOrderType>()" class="form-control">
+			<option disabled selected>-- Please Select a Order Type --</option>
+		</select>
+
 		<div class="mt-4 pt-2">
 			<input class="btn btn-primary btn-lg" type="submit" value="Place Order" />
 		</div>
@@ -43,5 +48,5 @@
 	</form>
 </div>
 <div>
-    <a asp-action="Index">Back to Add More Item</a>
+	<a asp-action="Index">Back to Add More Item</a>
 </div>

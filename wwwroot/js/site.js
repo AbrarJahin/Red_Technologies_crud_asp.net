@@ -78,6 +78,7 @@ $(document).ready(function () {
             //}],
             "columns": [
                 { "data": "name", "name": "Name", "autoWidth": true },
+                { "data": "availableUnit", "name": "Available Unit", "autoWidth": true },
                 { "data": "unitPrice", "name": "Unit Price", "autoWidth": true },
                 {
                     "data": "id",

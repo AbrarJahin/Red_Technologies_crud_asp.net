@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace StartupProject_Asp.NetCore_PostGRE.Data.Enums
 {
-    public enum EOrderType
+	public enum EOrderType
     {
         //[Display(Name = "Role-Claim Policy")]
-        [Description("Standard Order")]
+        [Description("Standard Order"), Display(Name = "Standard Order")]
         Standard = 0,
-        [Description("Sale Order")]
+        [Description("Sale Order"), Display(Name = "Sale Order")]
         Sale_Order,
-        [Description("Purchase Order")]
+        [Description("Purchase Order"), Display(Name = "Purchase Order")]
         Purchase_Order,
-        [Description("Transfer Order")]
+        [Description("Transfer Order"), Display(Name = "Transfer Order")]
         Transfer_Order,
-        [Description("Return Order")]
+        [Description("Return Order"), Display(Name = "Return Order")]
         Return_Order
     }
 }
