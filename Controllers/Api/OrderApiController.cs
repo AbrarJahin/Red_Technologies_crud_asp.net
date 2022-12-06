@@ -111,9 +111,11 @@ namespace StartupProject_Asp.NetCore_PostGRE.Controllers.Api
                 if (!string.IsNullOrEmpty(searchValue))
                 {
                     orderData = orderData.Where(p =>
-                                                        p.Customer.FullName.Contains(searchValue)
+                                                        p.Customer.FirstName.Contains(searchValue)
                                                         ||
-                                                        p.OrderType.ToString().Contains(searchValue)
+                                                        p.Customer.LastName.Contains(searchValue)
+                                                        //||
+                                                        //p.OrderType.ToString().Contains(searchValue)
                                                     );
                 }
                 int recordsFiltered = await orderData.CountAsync();
