@@ -25,27 +25,34 @@
 					}
 					@if (User.IsInRole("Super-Admin"))
 					{
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLeaveApplication" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Products
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdownProducts">
-						<a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Index">List All Products</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Create">Add a new Product</a>
-					</div>
-				</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLeaveApplication" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Products
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdownProducts">
+								<a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Index">List All Products</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Create">Add a new Product</a>
+							</div>
+						</li>
 
-								<li class="nav-item dropdown">
-									<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownSuperAdmin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										Super Admin
-									</a>
-									<div class="dropdown-menu" aria-labelledby="navbarDropdownSuperAdmin">
-										<a class="dropdown-item" asp-area="" asp-controller="RoleManager" asp-action="Index">Role Manage</a>
-										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" asp-area="" asp-controller="UserRoles" asp-action="Index">User Roles</a>
-									</div>
-								</li>}
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownSuperAdmin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Super Admin
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdownSuperAdmin">
+								<a class="dropdown-item" asp-area="" asp-controller="RoleManager" asp-action="Index">Role Manage</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" asp-area="" asp-controller="UserRoles" asp-action="Index">User Roles</a>
+							</div>
+						</li>
+					
+						<li class="nav-item dropdown">
+							<a class="nav-link" asp-area="" asp-controller="Orders" asp-action="Index" id="navbarDropdownOrder" role="button" aria-haspopup="true">
+								Orders
+							</a>
+						</li>
+					}
 					@if (User.IsInRole("Normal-User"))
 					{
 				<li class="nav-item dropdown">
