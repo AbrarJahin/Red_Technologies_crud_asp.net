@@ -19,12 +19,10 @@ namespace StartupProject_Asp.NetCore_PostGRE.Controllers.Api
 	[ApiController]
 	public class ProductApiController : ControllerBase
 	{
-		private readonly UserManager<User> _userManager;
         private readonly IRepositoryWrapper _repository;
 
-        public ProductApiController(IRepositoryWrapper repository, UserManager<User> userManager)
+        public ProductApiController(IRepositoryWrapper repository)
 		{
-			_userManager = userManager;
             _repository = repository;
 		}
 

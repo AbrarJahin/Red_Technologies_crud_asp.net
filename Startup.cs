@@ -57,6 +57,7 @@ namespace StartupProject_Asp.NetCore_PostGRE
                 //    options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
                 //}
                 options.UseSqlite(Configuration.GetConnectionString("SqliteConnection"));
+                //options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking); //For preventing the bug
             });
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
             #endregion
@@ -157,7 +158,7 @@ namespace StartupProject_Asp.NetCore_PostGRE
             services.AddHttpsRedirection(options =>
             {
                 options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
-                options.HttpsPort = 5001;
+                options.HttpsPort = 443;
             });
             #endregion
         }
