@@ -16,6 +16,6 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData
 		[Column("AvailableUnit"), Required(ErrorMessage = "Available Unit Count required"), Range(0, Int32.MaxValue, ErrorMessage = "The field {0} must be greater than {1}."), Display(Name = "Unit Price of the Product", Prompt = "Please Give Product Count")]
 		public int AvailableUnit { get; set; } = 1;
 
-		public ICollection<OrderProduct> OrderProducts { get; set; }
+		public virtual ICollection<OrderProduct> OrderProducts { get; set; }
 	}
 }

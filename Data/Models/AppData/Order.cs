@@ -22,7 +22,7 @@ namespace StartupProject_Asp.NetCore_PostGRE.Data.Models.AppData
         public virtual User Customer { get; set; }
         #endregion
 
-        public ICollection<OrderProduct> OrderProducts { get; set; }
+        public virtual ICollection<OrderProduct> OrderProducts { get; set; }
 
         [Column("OrderTotal"), Required(ErrorMessage = "Order Total required"), Range(0, Double.MaxValue, ErrorMessage = "The field {0} must be greater than {1}."), Display(Name = "Total Order Value", Prompt = "Please Give Order Total")]
         public float OrderTotal { get; set; } = 0;

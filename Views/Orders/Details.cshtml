@@ -9,38 +9,40 @@
 <div>
     <h4>Order</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OrderType)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OrderType)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Customer)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Customer.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreateTime)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreateTime)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LastUpdateTime)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LastUpdateTime)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DeletionTime)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DeletionTime)
-        </dd>
-    </dl>
+	<dl class="row">
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.OrderType)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.OrderType)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Customer)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Customer.FullName)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.OrderTotal)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.OrderTotal)
+		</dd>
+
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.IsPaid)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.IsPaid)
+		</dd>
+
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.IsApproved)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.IsApproved)
+		</dd>
+	</dl>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |

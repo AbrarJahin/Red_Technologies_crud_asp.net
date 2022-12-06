@@ -19,15 +19,16 @@ namespace StartupProject_Asp.NetCore_PostGRE.Controllers
             _repository = repository;
         }
 
-        // GET: Orders
-        public async Task<IActionResult> Index()
-        {
-            IQueryable<Order> applicationDbContext = _repository.Order.IncludeCustomer();//.IncludeProducts()
-            return View(await applicationDbContext.ToListAsync());
-        }
+		// GET: Orders
+		public IActionResult Index()
+		{
+			//IQueryable<Order> applicationDbContext = _repository.Order.IncludeCustomer();//.IncludeProducts()
+			//return View(await applicationDbContext.ToListAsync());
+			return View();
+		}
 
-        // GET: Orders/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+		// GET: Orders/Details/5
+		public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
             {

@@ -136,6 +136,47 @@ $(document).ready(function () {
         });
     }
     /////////////////////////////////////////
+
+    /////////////////////////////////Datatable for Placed Orders
+    if ($('#all-order-datatable').length > 0) {
+        //Datatable with ID exists
+        $('#all-order-datatable').DataTable({
+            bLengthChange: true,
+            lengthMenu: [[5, 10, 50, 100, -1], [5, 10, 50, 100, "All"]],
+            bFilter: true,
+            bSort: true,
+            bPaginate: true,
+            "processing": true,
+            "serverSide": true,
+            "filter": true,
+            "ajax": {
+                "url": $('meta[name=datatable-url]').attr('content'),
+                "type": "POST",
+                "datatype": "json"
+            },
+            "columns": [
+                { "data": "customer", "name": "Customer", "autoWidth": true },
+                { "data": "orderType", "name": "Order Type", "autoWidth": true },
+                { "data": "orderTotal", "name": "OrderTotal", "autoWidth": true },
+                { "data": "isApproved", "name": "Is Approved", "autoWidth": true },
+                { "data": "isPaid", "name": "Is Paid", "autoWidth": true },
+                {
+                    "data": "id",
+                    "name": "Id",
+                    "render": function (data, row) {
+                        var viewUrl = $('meta[name=view-url]').attr('content').slice(0, -1) + data;
+                        var deleteUrl = $('meta[name=delete-url]').attr('content').slice(0, -1) + data;
+                        var html = '<div class="btn-group" role="group" aria-label="Action"> <a href = "' + viewUrl + '" class="btn btn-primary" >View</a> <a href="' + deleteUrl + '" class="btn btn-danger">Delete</a></div >';
+                        //return "<a href='#' class='btn btn-danger' onclick=DeleteCustomer('" + data + "'); >Delete</a>";
+                        return html;
+                    },
+                    "searchable": false,
+                    "orderable": false
+                }
+            ]
+        });
+    }
+    /////////////////////////////////////////
 });
 
 function AddProductToCart(productId, changeVal = 1) {
