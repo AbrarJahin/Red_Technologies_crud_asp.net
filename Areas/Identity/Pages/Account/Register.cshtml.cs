@@ -13,13 +13,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using StartupProject_Asp.NetCore_PostGRE.Data.Enums;
 using StartupProject_Asp.NetCore_PostGRE.Data.Models.Identity;
 using StartupProject_Asp.NetCore_PostGRE.Services.EmailService;
 
 namespace StartupProject_Asp.NetCore_PostGRE.Areas.Identity.Pages.Account
 {
-    [AllowAnonymous]
+	[AllowAnonymous]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<User> _signInManager;
@@ -70,9 +69,9 @@ namespace StartupProject_Asp.NetCore_PostGRE.Areas.Identity.Pages.Account
             [Required(ErrorMessage = "You must provide your phone number")]
             [Display(Name = "Phone Number")]
             [DataType(DataType.PhoneNumber)]
-            [StringLength(15, MinimumLength = 11)]
+            [StringLength(15, MinimumLength = 9)]
             //[RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
-            [RegularExpression(@"^[0][1][3-9][0-9]{8}$", ErrorMessage = "Not a valid Banagladeshi mobile phone number without country code")]
+            [RegularExpression(@"^[0-9]{10}$", ErrorMessage = "Not a valid US mobile phone number without country code")]
             public string PhoneNumber { get; set; }
 
             [Required(ErrorMessage = "A paassword must be provided")]

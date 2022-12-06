@@ -161,11 +161,20 @@ namespace StartupProject_Asp.NetCore_PostGRE
                 options.HttpsPort = 443;
             });
             #endregion
+            #region Configure Swagger
+            services.AddSwaggerGen();
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env) //IWebHostEnvironment env - Can be removed
         {
+            #region Configure Swagger
+            app.UseSwagger();
+            app.UseSwaggerUI(so=> {
+                so.SwaggerEndpoint("/swagger/v1/swagger.json", "Cart API");
+            });
+            #endregion
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
